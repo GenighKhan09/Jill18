@@ -1,1 +1,601 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>jill & vianna</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@500;700&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,500&family=Manrope:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
 
+  :root{
+    --bg-deep:#170821;
+    --bg-purple:#241037;
+    --purple-mid:#4d2482;
+    --purple-soft:#6b3aa8;
+    --lavender:#b795e8;
+    --pink-glow:#e9bdf2;
+    --cream:#f6eefe;
+    --cream-dim:#cbb8dd;
+    --thread:#c9a6ec;
+  }
+
+  *{ margin:0; padding:0; box-sizing:border-box; }
+
+  html{ scroll-behavior:smooth; }
+
+  body{
+    background:var(--bg-deep);
+    color:var(--cream);
+    font-family:'Manrope', sans-serif;
+    font-weight:300;
+    overflow-x:hidden;
+  }
+
+  h1,h2,h3{
+    font-family:'Cormorant Garamond', serif;
+    font-weight:500;
+    letter-spacing:0.01em;
+  }
+
+  .script{
+    font-family:'Caveat', cursive;
+  }
+
+  a{ color:inherit; }
+
+  /* ---------- background ambience ---------- */
+
+  .glow{
+    position:fixed;
+    inset:0;
+    z-index:-1;
+    background:
+      radial-gradient(circle at 15% 10%, rgba(107,58,168,0.35), transparent 40%),
+      radial-gradient(circle at 85% 30%, rgba(233,189,242,0.12), transparent 45%),
+      radial-gradient(circle at 50% 90%, rgba(77,36,130,0.4), transparent 50%),
+      var(--bg-deep);
+  }
+
+  /* ---------- hero ---------- */
+
+  .hero{
+    min-height:100svh;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    text-align:center;
+    padding:2rem 1.5rem;
+    position:relative;
+  }
+
+  .hero .eyebrow{
+    font-family:'Caveat', cursive;
+    font-size:1.4rem;
+    color:var(--pink-glow);
+    letter-spacing:0.04em;
+    margin-bottom:0.5rem;
+  }
+
+  .hero h1{
+    font-size:clamp(3rem, 10vw, 6.5rem);
+    font-style:italic;
+    line-height:1;
+    background:linear-gradient(120deg, var(--pink-glow), var(--lavender) 60%, var(--purple-soft));
+    -webkit-background-clip:text;
+    background-clip:text;
+    color:transparent;
+  }
+
+  .hero .amp{
+    display:block;
+    font-family:'Caveat', cursive;
+    font-style:normal;
+    font-size:0.5em;
+    color:var(--cream-dim);
+    margin:0.1em 0;
+  }
+
+  .hero p{
+    margin-top:1.5rem;
+    max-width:32ch;
+    color:var(--cream-dim);
+    font-size:1.05rem;
+    line-height:1.6;
+  }
+
+  .scroll-cue{
+    position:absolute;
+    bottom:2.5rem;
+    font-family:'Caveat', cursive;
+    font-size:1.1rem;
+    color:var(--cream-dim);
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    gap:0.4rem;
+    opacity:0.8;
+  }
+
+  .scroll-cue .heart{
+    position:relative;
+    width:16px;
+    height:16px;
+    margin-top:0.4rem;
+    transform:rotate(-45deg);
+    background:var(--pink-glow);
+    animation:beat 1.6s ease-in-out infinite;
+  }
+
+  .scroll-cue .heart::before,
+  .scroll-cue .heart::after{
+    content:"";
+    position:absolute;
+    width:16px;
+    height:16px;
+    border-radius:50%;
+    background:var(--pink-glow);
+  }
+
+  .scroll-cue .heart::before{ top:-8px; left:0; }
+  .scroll-cue .heart::after{ top:0; left:8px; }
+
+  @keyframes beat{
+    0%,100%{ transform:rotate(-45deg) scale(1); opacity:0.75; }
+    50%{ transform:rotate(-45deg) scale(1.2); opacity:1; }
+  }
+
+  /* ---------- shared section styling ---------- */
+
+  section.block{
+    position:relative;
+    max-width:1080px;
+    margin:0 auto;
+    padding:6rem 1.5rem;
+  }
+
+  .label-row{
+    display:flex;
+    align-items:baseline;
+    gap:0.9rem;
+    margin-bottom:2.5rem;
+  }
+
+  .label-tag{
+    font-family:'Caveat', cursive;
+    font-size:1.5rem;
+    color:var(--pink-glow);
+  }
+
+  .label-row h2{
+    font-size:clamp(2rem, 5vw, 3rem);
+    font-style:italic;
+    color:var(--cream);
+  }
+
+  .label-line{
+    flex:1;
+    height:1px;
+    background:linear-gradient(90deg, var(--purple-soft), transparent);
+    min-width:40px;
+  }
+
+  .content-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:3.5rem;
+    align-items:center;
+  }
+
+  .content-grid.reverse .text-col{ order:2; }
+  .content-grid.reverse .photo-col{ order:1; }
+
+  .text-col p{
+    font-size:1.08rem;
+    line-height:1.85;
+    color:var(--cream-dim);
+  }
+
+  .text-col p::first-letter{
+    font-family:'Cormorant Garamond', serif;
+    font-size:2.6rem;
+    color:var(--pink-glow);
+    float:left;
+    line-height:0.8;
+    margin:0.08em 0.1em 0 0;
+    font-style:italic;
+  }
+
+  /* ---------- photo scrapbook ---------- */
+
+  .photo-col{
+  width: 100%;
+  display:grid;
+  grid-template-columns:repeat(auto-fit, minmax(300px, 300px));
+  justify-content:center;
+  justify-items:center;
+  gap:1rem;
+}
+  
+  .photo-col .polaroid:nth-child(1){ transform:rotate(-4deg); margin-top:1.5rem; }
+  .photo-col .polaroid:nth-child(2){ transform:rotate(3deg); }
+  .photo-col .polaroid:nth-child(3){ transform:rotate(2deg); grid-column:1 / -1; margin:0.5rem auto 0; }
+
+  .polaroid {
+  background: var(--cream);
+  padding: 0.6rem 0.6rem 1.6rem;
+  border-radius: 2px;
+  box-shadow: 0 12px 30px rgba(0,0,0,0.45);
+  transition: transform 0.35s ease;
+
+  width: 120%;
+  max-width: 400px; /* or 350px, 400px */
+}
+  .polaroid:hover{
+    transform:rotate(0deg) scale(1.04) !important;
+  }
+
+  .polaroid .frame{
+    aspect-ratio:1/1;
+    width:100%;
+    border-radius:1px;
+    overflow:hidden;
+    background:
+      linear-gradient(135deg, var(--purple-mid), var(--bg-purple));
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    color:var(--lavender);
+    position:relative;
+  }
+
+  .polaroid img{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    object-position: center;
+    display:block;
+  }
+
+  .frame .placeholder{
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    gap:0.5rem;
+    color:var(--lavender);
+    opacity:0.75;
+    font-size:0.75rem;
+    text-align:center;
+    padding:0.5rem;
+  }
+
+  .frame svg{ width:26px; height:26px; opacity:0.8; }
+
+  .polaroid figcaption{
+    display:block;
+    text-align:center;
+    font-family:'Caveat', cursive;
+    color:#4a2f66;
+    font-size:1.05rem;
+    padding-top:0.7rem;
+  }
+
+  /* ---------- connector thread ---------- */
+
+  .thread-wrap{
+    position:relative;
+    max-width:1080px;
+    margin:0 auto;
+    display:flex;
+    justify-content:center;
+    padding:1rem 1.5rem 2rem;
+  }
+
+  .thread-wrap svg{
+    width:100%;
+    max-width:260px;
+    height:auto;
+    display:block;
+  }
+
+  .thread-note{
+    position:absolute;
+    top:50%;
+    left:50%;
+    transform:translate(-50%,-50%);
+    background:var(--bg-deep);
+    padding:0.3rem 1rem;
+    font-family:'Caveat', cursive;
+    font-size:1.3rem;
+    color:var(--pink-glow);
+    white-space:nowrap;
+    border:1px solid rgba(199,166,236,0.35);
+    border-radius:999px;
+  }
+
+  /* ---------- footer ---------- */
+
+  footer{
+    text-align:center;
+    padding:4rem 1.5rem 3rem;
+    color:var(--cream-dim);
+  }
+
+  footer .script{
+    font-size:1.6rem;
+    color:var(--pink-glow);
+    display:block;
+    margin-bottom:0.4rem;
+  }
+
+  footer small{
+    font-size:0.75rem;
+    letter-spacing:0.08em;
+    text-transform:uppercase;
+    opacity:0.5;
+  }
+
+  /* ---------- reveal on scroll ---------- */
+
+  .reveal{
+    opacity:0;
+    transform:translateY(24px);
+    transition:opacity 0.8s ease, transform 0.8s ease;
+  }
+  .reveal.in{
+    opacity:1;
+    transform:translateY(0);
+  }
+
+  @media (prefers-reduced-motion: reduce){
+    .reveal{ opacity:1; transform:none; transition:none; }
+    .scroll-cue .heart{ animation:none; }
+  }
+
+  /* ---------- responsive ---------- */
+
+  @media (max-width: 760px){
+    .content-grid{
+      grid-template-columns:1fr;
+      gap:2rem;
+    }
+    .content-grid.reverse .text-col,
+    .content-grid.reverse .photo-col{
+      order:initial;
+    }
+    section.block{ padding:4rem 1.25rem; }
+  }
+
+</style>
+</head>
+<body>
+
+<div class="glow"></div>
+
+<!-- HERO -->
+<header class="hero">
+  <h1>Happy 18th birthday<span class="amp"></span>Jill</h1>
+  <p>A little corner of the internet for my favorite person â some of it just for her, some of it for the both of us.</p>
+  <div class="scroll-cue">scroll<span class="heart"></span></div>
+</header>
+
+<main>
+
+  <!-- JUST JILL -->
+  <section class="block reveal">
+    <div class="label-row">
+      <span class="label-tag"></span>
+      <h2>Jill</h2>
+      <div class="label-line"></div>
+    </div>
+
+    <div class="content-grid">
+      <div class="photo-col">
+       <figure class="polaroid">
+          <div class="frame">
+             <img src="onlyjill.JPG" alt="Jill">
+          </div>
+          <figcaption>main character energy</figcaption>
+        </figure>
+      </div>
+
+      <div class="text-col">
+        <p>
+          BUON COMPLEANNO TO THE ONE AND ONLY JILLIAN IN MY LIFE!! CONGRATS JILL DAHIL LEGAL KANA ð¥³ð¥³ð¥³ Let's g party party ððððð I am very honored to be your best friend, I am so proud of you for being a sweet, nice, and caring bff to me. I am so excited for our next journey and for the college life that we've been dreaming of since we were in junior high school. Sana makita mo na siya, hueyyyyy HAHAHAH pag nagwork baka namannnnn trip to Boracay us? Chariz ðð Always take good care of yourself ha, always gid, and iya man me para kimo always, same tag nagatangis me and kimo ako ga rants kasi ikaw ro willing nga mag listen kakon. Sabi nga nila "I have a theory that as long as you have one good friend, one real friend, you can get through anything.â and ikaw yon! You know na the other messages na I can't explain now kasi pabalik-balik lang dayon kasi ginghmabae ko ro iba last year and sa other part of this message. I just want you to know nga very very special gid ikaw sa akon nga life, for me hay wa gid it makapantay kimo. ð¥°ð¥°ð¥° STAYYYY GORGEOUS MY GURLLLYYYY, AND ALWAYS SHOW WHO YOU REALLY ARE!! THE CUTESIEEE AND CLEAN GIRLY FOR ME, I LOVE YOU A LOT JILL!! ð¥³ð¥³ð¥³ pls enjoy your day, I'm here if you want nga magwarang us MWAAHH MWAHHH ðððððððð
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONNECTOR -->
+  <div class="thread-wrap reveal">
+    <svg viewBox="0 0 260 90" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+      <path d="M20 10 C 90 40, 90 40, 130 45 C 170 50, 170 50, 240 80"
+            fill="none" stroke="url(#threadGrad)" stroke-width="2" stroke-linecap="round" stroke-dasharray="1 9"/>
+      <circle cx="130" cy="45" r="4.5" fill="#e9bdf2"/>
+      <defs>
+        <linearGradient id="threadGrad" x1="0" y1="0" x2="1" y2="1">
+          <stop offset="0%" stop-color="#b795e8"/>
+          <stop offset="100%" stop-color="#e9bdf2"/>
+        </linearGradient>
+      </defs>
+    </svg>
+    <div class="thread-note">tied together since day one</div>
+  </div>
+
+  <!-- US -->
+  <section class="block reveal">
+    <div class="label-row">
+      <span class="label-tag">the two of us</span>
+      <h2>Vianna &amp; Jill</h2>
+      <div class="label-line"></div>
+    </div>
+
+    <div class="content-grid reverse">
+      <div class="photo-col">
+        <figure class="polaroid">
+          <div class="frame">
+            <img src="vianjillbeach.JPG" alt="Jill">
+          </div>
+          
+        </figure>
+        <figure class="polaroid">
+          <div class="frame">
+            <img src="vianjillselfie.JPG" alt="Jill">
+          </div>
+          
+        </figure>
+        <figure class="polaroid">
+          <div class="frame">
+            <img src="vianjillkid.JPG" alt="Jill">
+          </div>
+          
+        </figure>
+      </div>
+
+      <div class="text-col">
+        <p>
+          100 Things why I love JILLIAN
+1. She never turn back at me when I need her.
+2. Always been a good best friend to me at the very start.
+3. She's always there when I need her.
+4. Didn't ever make me feel left out or lonely.
+5. Stayed, even the friend group was falling apart.
+6. Makes me feel heard and seen.
+7. She supports me with my âkaartehanâ.
+8. Always with me at all cost.
+9. She always listen to me, even I yap and talk about something over and over again.
+10. Was there when I was crying, and when my life was falling apart.
+11. Makes me feel like I have a sister. ð«ð«ð«
+12. Cheered me up when I was going through my break up.
+13. Listened to me while I'm talking about my family problems, even cried with me when I called her the time that I was crying.
+14. We have chika always.
+15. Help me how to figure things out.
+16. She's been there since I was with my first bf, cuz we love foreigner hunting. Joke!
+17. Always makes me laugh, even in the worst situation.
+18. She hypes me, and compliment me a lot when I'm posting myself. Love it! ðð
+19. She stayed, even if we separated in Senior High School.
+20. Always âG! â when I'm planning out something, like going to kalibo.
+21. She goes with me, if I need to do something, like next week maybe, cuz I need to go to the dentist. ð¥°ð»
+22. NEVER BEEN A BAD FRIEND, EVUHHHHH!!!
+23. Takes good picture of me. ANO TALAGA TO GUYS PAAMAN ð¥°ð¥°
+24. She makes me feel special, most of all on my birthday.
+25. Sweet siya guys! Minsan halata, minsan hindi. Joke ðððð
+26. Has a good style.
+27. She's VERYYYY pretty, mwaaaa.
+28. Kase lablab Nana ako guys hehehehe
+29. Alam ang GIRL CODE, dabest talaga!
+30. SOBRANG GANDAAAA
+31. Invites me to their house.
+32. Never kami nag-away sa kahit anong bagay.
+33. Kinddddd ðð
+34. She has a good heart, and is very lovely.
+35. She's so smart âð»ð¤
+36. WE LOVE SKINCAREEEEE
+37. Very gorgeous, plus pa kung may glasses imaw. ð©ð©
+38. Loves me! ð¥°ð¥°
+39. Has a wonderful personality.
+40. Is a cheerful person.
+41. Didn't ever let me down, when it comes to being my bff.
+42. Doesn't let anyone bothers her peace, keeps everything aligned, and ik she loves being the way she is, cuz for me she is EVERYTHING I could ask for in terms of having an awesome best friend.
+43. Is loyal, faithful, and honest type of a person.
+44. Our bond never gets broken, whatever happen.
+45. I love her, because we have a healthy friendships with no jealousy or other thing.
+46. She has this goofy, silly, and dope personality which is I like.
+47. Ginasabayan na abi ako sang trip, always.
+48. Gina spoil man nana ako guysss
+49. Supporter ko kahit sa anong relationship HAHAHHA
+50. HANDA SYA PALAGIII
+51. Cuz she tried hard para magkasama kami sa bh.
+52. Always have this nice plans, and is a very clever girl.
+53. I love how the way she puts herself first.
+54. She doesn't forget about me. Aweee
+55. Lets me borrow some of her makeup before, when I stayed in their house.
+56. I felt very appreciated when I was in their house, like I'm very welcome.
+57. She sleeps with me at the time that I was in their house, because I'm kinda scared of nothing haha.
+58. She loves ukay, as much as I do!
+59. Mind you, she's the bestest of all for me.
+60. She always claim me as her bff, and that's what I like, because some used to call me just a friend.
+61. She never denied me as her bff
+62. She has a very strong bond and relationship with God.
+63. Has this sweet and lovely voice.
+64. I love the way she calls me gurl, sisz, bff, and etc.
+65. Supports me at my katangahan.
+66. She shares with me hehwhhe cutieeee.
+67. I can trust her with my whole life.
+68. Never a snitch guys saakin.
+69. Nice music taste.
+70. Loves to do productive things.
+71. She is a very talented girl.
+72. She's my definition of a clean girl.
+73. Kagwapa gida abiiiiii!
+74. She tells the truth to me.
+75.She treats me well.
+76. Always update me about very important things and most of all when it comes to school.
+77. Gives the best advice
+78. She understands me, even I'm not that very understandable. hahaha
+79. Always present when I invite here at any party before in my house.
+80. We plan some cutie things before in junior high for college, and we're about to fulfill those dreams.
+81. Nevuhhhh say no when it comes to planning about traveling in the future. ððð
+82. She tells me that she's gonna be the godmother of my kid in the future, which is very cutieee for me. Amen!
+83. A very well mannered girl.
+84. Loves Chinese HAHAHAH
+85. Such a good bff talaga, she's someone that I won't ever let down.
+86. She's someone who stands beside me even when everything feels uncertain.
+87. The one who I can say that knows me really well.
+88. Can truly see me and genuinely cares about me.
+89. A good daughter and sister to her siblings.
+90. She's someone you can rely on.
+91. I love her, because i never once had to ask her to be a good friend.
+92. My favorite person.
+93. She's like an angel, what a gift from the heaven.
+94. We may not talk to everyday, but when life gets heavy, she's the one i trust the most.
+95. She have this good vibes that I really adore.
+96. Cuz she seen me at my worst and my best.
+97. She might have her own battles, but I can say she handles it wonderfully.
+98. I never had a fake laugh with her.
+99. I enjoy being with her eating, talking, crying and more.
+100. SHE'S THE BEST!!!!
+        </p>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <span class="script">for Jill, from Vianna</span>
+  
+</footer>
+
+<script>
+  const revealEls = document.querySelectorAll('.reveal');
+
+  const showAll = () => {
+    revealEls.forEach(el => el.classList.add('in'));
+  };
+
+  if ('IntersectionObserver' in window) {
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          e.target.classList.add('in');
+          io.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.05 });
+
+    revealEls.forEach(el => io.observe(el));
+  } else {
+    showAll();
+  }
+
+  // fallback for mobile browsers
+  window.addEventListener('load', showAll);
+  window.addEventListener('resize', showAll);
+</script>
+
+</body>
+</html>
